@@ -1,6 +1,20 @@
 import React from 'react'
 
-const Form = ({ activityForm }) => {
+const Form = ({ activityForm, setActivityForm }) => {
+
+
+    const handleChange = (e) => {
+        let value;
+        (e.target.value >= activityForm[e.target.name].target.number)
+            ?
+            value = activityForm[e.target.name].target.number
+            :
+            value = e.target.value
+
+        activityForm[e.target.name].achieved = value
+        setActivityForm({ ...activityForm })
+    }
+
     return (
         <div className="flex flex-col gap-[20px] h-full w-full ">
 
@@ -13,23 +27,28 @@ const Form = ({ activityForm }) => {
                             <div className='flex justify-between gap-[4px] flex-[6] ' >
                                 <span className='flex-[4] h-[1rem] ' >
                                     {
-                                        activityValue.type.toLowerCase() == 'number'
+                                        activityValue.type.toLowerCase() == 'boolean'
                                             ?
+                                            <select
+                                                onChange={handleChange}
+                                                name={activityName}
+                                                value={activityValue.achieved}
+                                                className='w-full border-none rounded-[2px] outline-purple-400 px-[4px] '
+                                            >
+                                                <option value={100}>Yes</option>
+                                                <option value={0}>No</option>
+                                            </select>
+                                            :
                                             <input
                                                 type="number"
                                                 className='w-full border-none rounded-[2px] outline-purple-400 px-[4px] '
-                                                defaultValue={0}
-                                                value={Object.values(activityValue.chunks).reduce((sum, chunkValue) => sum + chunkValue, 0)}
+                                                name={activityName}
+                                                onChange={handleChange}
+                                                max={activityValue.target.number}
+                                                min={activityValue.default}
+                                                value={activityValue.achieved}
                                                 placeholder=''
                                             />
-                                            :
-                                            <select
-                                                value={Object.values(activityValue.chunks)[0] == 100 ? 'true' : 'false'}
-                                                className='w-full border-none rounded-[2px] outline-purple-400 px-[4px] '
-                                            >
-                                                <option value='true'>Yes</option>
-                                                <option value='false'>No</option>
-                                            </select>
                                     }
                                 </span>
                                 <span className='flex-[2] ' >{activityValue.target.unit}</span>
@@ -44,3 +63,6 @@ const Form = ({ activityForm }) => {
 }
 
 export default Form
+
+
+// value={Object.values(activityValue.chunks).reduce((sum, chunkValue) => sum + chunkValue, 0)}

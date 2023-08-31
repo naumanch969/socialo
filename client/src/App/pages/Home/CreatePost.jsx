@@ -141,8 +141,8 @@ const CreatePost = () => {
             <Modal open={showModal} onClose={() => closeModal()} className='flex justify-center items-center ' >
                 <div className='bg-white w-[36rem] h-[28rem] rounded-[8px] p-[1rem] overflow-y-scroll  ' >
 
-                    <div className='h-[12%] relative flex justify-center items-center pb-[12px] ' >
-                        <h4 className='text-[18px] font-bold text-black ' >Create Post</h4>
+                    <div className='h-[12%] relative flex justify-center items-center ' >
+                        <h4 className='text-[22px] font-bold text-black ' >Create Post</h4>
                         <button onClick={() => setShowModal(false)} className='absolute right-0 w-[2rem] h-[2rem] rounded-full bg-gray-100 ' ><Close /></button>
                     </div>
 
